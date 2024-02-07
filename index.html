@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>Valentine's Day Quiz</title>
+    
+    
+</head>
+
+<body>
+	<style>
+    @keyframes heartfade {
+        0% {
+            opacity : 1;
+        }
+        50% {
+            opacity : 0;
+        }
+    }
+    .heart {
+        z-index : 999;
+        animation : heartfade 6s linear;
+        position : absolute; 
+    }
+    .heart:before,
+    .heart:after {
+        content : "";
+        background-color : #fc2a62;
+        position : absolute;
+        height : 30px;
+        width : 45px;
+        border-radius : 15px 0px 0px 15px;
+    }
+
+    .heart:before {
+        transform : rotate(45deg);
+    }
+
+    .heart:after {
+        left : 10.5px;
+        transform : rotate(135deg);
+    }
+    </style>
+</head>
+<body>
+    
+</body>
+<script>
+    
+    var brd = document.createElement("DIV");
+    document.body.insertBefore(brd, document.getElementById("board"));
+
+    const duration = 3000;
+    const speed = 0.5;
+    const cursorXOffset = 0;
+    const cursorYOffset = -5;
+
+    var hearts = [];
+    
+    function generateHeart(x, y, xBound, xStart, scale)
+    {
+        var heart = document.createElement("DIV");
+        heart.setAttribute('class', 'heart');
+        brd.appendChild(heart);
+        heart.time = duration;
+        heart.x = x;
+        heart.y = y;
+        heart.bound = xBound;
+        heart.direction = xStart;
+        heart.style.left = heart.x + "px";
+        heart.style.top = heart.y + "px";
+        heart.scale = scale;
+        heart.style.transform = "scale(" + scale + "," + scale + ")";
+        if(hearts == null)
+            hearts = [];
+        hearts.push(heart);
+        return heart;
+    }
+
+    var down = false;
+    var event = null;
+
+    document.onmousedown = function(e) {
+        down = true;
+        event = e;
+    }
+
+    document.onmouseup = function(e) {
+        down = false;
+    }
+
+    document.onmousemove = function(e) {
+        event = e;
+    }
+
+    document.ontouchstart = function(e) {
+        down = true;
+        event = e.touches[0];
+    }
+
+    document.ontouchend = function(e) {
+        down = false;
+    }
+
+    document.ontouchmove = function(e) {
+        event = e.touches[0];
+    }
+
+    var before = Date.now();
+    var id = setInterval(frame, 5);
+    var gr = setInterval(check, 100);
+
+    function frame()
+    {
+        var current = Date.now();
+        var deltaTime = current - before;
+        before = current;
+        for(i in hearts)
+        {
+            var heart = hearts[i];
+            heart.time -= deltaTime;
+            if(heart.time > 0)
+            {
+                heart.y -= speed;
+                heart.style.top = heart.y + "px";
+                heart.style.left = heart.x + heart.direction * heart.bound * Math.sin(heart.y * heart.scale / 30) / heart.y * 200 + "px";
+            }
+            else
+            {
+                heart.parentNode.removeChild(heart);
+                hearts.splice(i, 1);
+            }
+        }
+    }
+
+    function check()
+    {
+        if(down)
+        {
+            var start = 1 - Math.round(Math.random()) * 2;
+            var scale = Math.random() * Math.random() * 0.8 + 0.2;
+            var bound = 30 + Math.random() * 20;
+            generateHeart(event.pageX - brd.offsetLeft + cursorXOffset, event.pageY - brd.offsetTop + cursorYOffset, bound, start, scale);
+        }
+    }
+
+</script>
+
+
+    <div class="cloudone"></div>
+    <div class="cloudtwo"></div>
+    <div class="cloudthree"></div>
+    <div class="cloudfour"></div>
+    <div class="cloudfive"></div>
+    <div class="cloudsix"></div>
+    <div class="cloudseven"></div>
+    <div class="cloudeight"></div>
+    <div class="cloudnine"></div>
+
+
+
+    <audio id="background-music" controls>
+        <source id="audio-source" src="Perfect.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+    
+    <button id="play-button">Play Audio</button>
+    
+    <script>
+        document.getElementById("play-button").addEventListener("click", function() {
+            var audio = document.getElementById("background-music");
+            audio.play();
+
+            
+    audio.addEventListener("ended", function() {
+        audio.currentTime = 0; // Reset the audio to the beginning
+        audio.play(); // Start playback again
+    });
+        });
+        var audio = document.getElementById("background-music");
+    var source = document.getElementById("audio-source");
+
+    var songs = ["Perfect.mp3", "GladYouExist.mp3", "You.mp3", "You=I.mp3."]; // List of songs
+    var currentSongIndex = 0; // Index of the current song
+
+    // Function to play the next song
+    function playNextSong() {
+        currentSongIndex = (currentSongIndex + 1) % songs.length; // Increment index, looping back to 0 if needed
+        source.src = songs[currentSongIndex]; // Set the source to the next song
+        audio.load(); // Reload the audio element with the new source
+        audio.play(); // Start playing the next song
+    }
+
+    // Listen for the "ended" event to play the next song
+    audio.addEventListener("ended", playNextSong);
+</script>
+   
+    
+
+    <div id="quiz-container">
+        <div id="quiz" class="hidden">
+            <h2>Valentine's Day Quiz &#x1F498</h2>
+            <h4 class="heading2">Hi Baby, I hope you would have fun answering all the questions that I've prepared. There will be a special page for both of us if you answered all the questions correctly. All the best!</h4>
+            <h3>Please answer the question correctly baby &#128536 </h3>
+            <p><b>(For the text answer part screenshot the answer to me pleaseee.)</b></p>
+            <p>&ensp;</p>
+            <form id="quiz-form">
+                <div class="question">
+                    <p><b>1. When did we first met? </b></p>
+                    <label>
+                        <input type="radio" name="q1" value="a"> 24th of October
+                    </label>
+                    <label>
+                        <input type="radio" name="q1" value="b"> 20th of September
+                    </label>
+                    <label>
+                        <input type="radio" name="q1" value="c"> 21st of September
+                    </label>
+                    <label>
+                        <input type="radio" name="q1" value="d"> 22nd of October
+                    </label>
+                </div>
+
+                <div class="question">
+                    <p><b>2. What is the airline that we sat on when we first met? &#x2708</b></p>
+                    <label>
+                        <input type="radio" name="q2" value="a"> AirAsia
+                    </label>
+                    <label>
+                        <input type="radio" name="q2" value="b"> Scoot
+                    </label>
+                    <label>
+                        <input type="radio" name="q2" value="c"> FireFly
+                    </label>
+                    <label>
+                        <input type="radio" name="q2" value="d"> Singapore Airline
+                    </label>
+                </div>
+
+                <div class="question">
+                    <p><b>3. When is our official Anniversary? &#x1F49E</b></p>
+                    <label>
+                        <input type="radio" name="q3" value="a"> 30th of September
+                    </label>
+                    <label>
+                        <input type="radio" name="q3" value="b"> 7th of October
+                    </label>
+                    <label>
+                        <input type="radio" name="q3" value="c"> 5th of October
+                    </label>
+                    <label>
+                        <input type="radio" name="q3" value="d"> 8th of November
+                    </label>
+                </div>
+
+
+                <div class="question">
+                    <p><b>4. When did we had our first kiss? &#x1F48F</b></p>
+                    <label>
+                        <input type="radio" name="q4" value="a"> 24th of November
+                    </label>
+                    <label>
+                        <input type="radio" name="q4" value="b"> 8th of October
+                    </label>
+                    <label>
+                        <input type="radio" name="q4" value="c"> 25th of October
+                    </label>
+                    <label>
+                        <input type="radio" name="q4" value="d"> 20th of November
+                    </label>
+                </div>
+
+                <div class="question">
+                    <p><b>5. What is my favourite cuisine? &#128523</b></p>
+                    <label>
+                        <input type="radio" name="q5" value="a"> Chinese cuisine
+                        <label>
+                            <input type="radio" name="q5" value="b"> Wesley's homemade cuisine
+                        </label>
+                        <label>
+                            <input type="radio" name="q5" value="c"> Western cuisine
+                        </label>
+                        <label>
+                            <input type="radio" name="q5" value="d"> Japanese cuisine
+                        </label>
+                </div>
+
+                <div class="question">
+                    <p><b>6. What is the row number of our seat in the flight? &#128186;</b></p>
+                    <label>
+                        <input type="radio" name="q6" value="a"> 20
+                        <label>
+                            <input type="radio" name="q6" value="b"> 16
+                        </label>
+                        <label>
+                            <input type="radio" name="q6" value="c"> 19
+                        </label>
+                        <label>
+                            <input type="radio" name="q6" value="d"> 21
+                        </label>
+                </div>
+
+                <div class="question">
+                    <p><b>7. What is your favourite memory of us together? &#x1F970 </b></p>
+                    <textarea name="q7" rows="10" placeholder="Your Answer"></textarea>
+                </div>
+
+                <div class="question">
+                    <p><b>8. When is my birthday? &#127874 </b></p>
+                    <label>
+                        <input type="radio" name="q8" value="a"> 21st of April 2003
+                        <label>
+                            <input type="radio" name="q8" value="b"> 21st of May 2004
+                        </label>
+                        <label>
+                            <input type="radio" name="q8" value="c"> 23rd of April 2003
+                        </label>
+                        <label>
+                            <input type="radio" name="q8" value="d"> 22nd of April 2004
+                        </label>
+                </div>
+
+                <div class="question">
+                    <p><b>9. What are the places that we had our date? &#x1F491 (Select all that apply)</b></p>
+                    <label>
+                        <input type="checkbox" name="q9" value="a"> LAVO
+                    </label>
+                    <label>
+                        <input type="checkbox" name="q9" value="b"> Orchard Road
+                    </label>
+                    <label>
+                        <input type="checkbox" name="q9" value="c"> Piermont Grand Condo
+                    </label>
+                    <label>
+                        <input type="checkbox" name="q9" value="d"> Universal Studio Singapore
+                    </label>
+                </div>
+
+                <div class="question">
+                    <p><b>10. Will you always love me, for better or for worse? &#x1F49F</b></p>
+                    <textarea name="q10" rows="10" placeholder="Your Answer"></textarea>
+                </div>
+
+                <div class="question">
+                    <p><b>11. What is my cat's name? &#128568</b></p>
+                    <label>
+                        <input type="radio" name="q11" value="a"> Tabibi
+                        <label>
+                            <input type="radio" name="q11" value="b"> Fat boi
+                        </label>
+                        <label>
+                            <input type="radio" name="q11" value="c"> Meowmeow
+                        </label>
+                        <label>
+                            <input type="radio" name="q11" value="d"> Tabby
+                        </label>
+                </div>
+
+                <div class="question">
+                    <p><b>12. What are the goals that you wish to achieve with me? List out all of the
+                            goals.
+                            &#127775</b></p>
+                    <textarea name="q12" rows="10" placeholder="Your Answer"></textarea>
+                </div>
+
+                <div class="question">
+                    <p><b>13. What are the gifts that I bought/made for you in 2023? &#127873 (Select all
+                            that apply)</b></p>
+                    <label>
+                        <input type="checkbox" name="q13" value="a"> Perfume
+                    </label>
+                    <label>
+                        <input type="checkbox" name="q13" value="b"> Soft Toy
+                    </label>
+                    <label>
+                        <input type="checkbox" name="q13" value="c"> Ferrari Lego
+                    </label>
+                    <label>
+                        <input type="checkbox" name="q13" value="d"> Love Jar
+                    </label>
+                </div>
+
+                <div class="question">
+                    <p><b>14. Will you treat me well and let me spend your money once your job is secure?
+                            &#128184 (Select all that apply)</b></p>
+                    <label>
+                        <input type="checkbox" name="q14" value="a"> Yes, definitely
+                    </label>
+                    <label>
+                        <input type="checkbox" name="q14" value="b"> Hell yessssssss
+                    </label>
+                    <label>
+                        <input type="checkbox" name="q14" value="c"> Of course! You are my one and only, who else will
+                        spend my money other than my cute little girlfriend?
+                    </label>
+                    <label>
+                        <input type="checkbox" name="q14" value="d"> NO,I will spend for other bitch &#128544
+                    </label>
+                </div>
+
+                <div class="question">
+                    <p><b>15. Why do you love me? &#129300 </b></p>
+                    <label>
+                        <input type="checkbox" name="q15" value="a"> Because you are cute.
+                        <label>
+                            <input type="checkbox" name="q15" value="b"> Because there is no reason to love someone, if
+                            there must be a reason, then it is because we are meant to be. (AWWWWWW &#129402)
+                        </label>
+                        <label>
+                            <input type="checkbox" name="q15" value="c"> Because you are my girlfriend, I love you from
+                            the bottom of my heart.
+                        </label>
+                        <label>
+                            <input type="checkbox" name="q15" value="d"> NO, who said I love you, I have other bitches.
+                            &#128544
+                        </label>
+                </div>
+
+                <h3>Last question from me, my dear baby.</h3>
+                <div class="question1">
+                    <p><b>&#x1F49D SPECIAL QUESTION &#x1F49D</b></p>
+                    <p><b> If you have one chance to go back to the day we first met,
+                            will you choose to talk to me again? Do you wish to hold my hands and go through this life
+                            together?Is there anything else you want to tell me?
+                            </b></p>
+                    <textarea name="q16" rows="15" placeholder="Your Answer"></textarea>
+                </div>
+
+                <h4 class="heading1">&#x1F48C Thank you for answering the question baby, I love you. 
+                    <br><span class="valentine">Happy Valentine's Day! &#x1F618</span></h4>
+
+                <button type="submit">Submit</button>
+
+                <img src="cupid1.png" class="cupid1" >
+                <img src="cupid2.png" class="cupid" style="top: 10%; right: 5%;">
+                <img src="cupid3.png" class="cupid" style="top: 100%; left: 7%;">
+                <img src="cupid4.png" class="cupid" style="top: 73%; right: 7%;">
+                <img src="cupid5.png" class="cupid" style="top: 100%; left: 7%;">
+                <img src="couple.png" class="cupid" style="top: 140%; right: 10%;">
+                <img src="airplane.png" class="cupid" style="top: 137%; right: 13%;">
+                <img src="propose.png" class="cupid" style="top: 173%; left: 13%;">
+                <img src="wedding1.png" class="cupid" style="top: 220%; right: 5%;">
+                <img src="famwithdog.png" class="cupid" style="top: 265%; left: 5%;">
+                <img src="lovee.png" class="cupid" style="top: 298%; right: 10%;">
+            </form>
+
+
+            
+
+
+        </div>
+    </div>
+    <script src="script.js"></script>
+
+
+</body>
+
+</html>

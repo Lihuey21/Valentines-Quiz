@@ -1,0 +1,236 @@
+/* Reset some default styles */
+body, h1, h2, h3, p, textarea, button {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Papyrus', 'fantasy' ;
+    background-color: #e42a4c;
+    color: #200c0c;
+}
+
+#quiz-container {
+  max-width: 800px;
+  margin: 20px auto;
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+#quiz {
+    text-align: center;
+}
+
+.question {
+    margin-bottom: 20px;
+}
+
+textarea {
+    width: 100%;
+    padding: 10px;
+    box-sizing: border-box;
+    margin-top: 5px;
+}
+
+button {
+    background-color: #ff4081;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+button:hover {
+    background-color: #d81b60;
+}
+
+h2 {
+    color: #ff4081;
+    border: 2px solid red;
+    padding: 10px;
+    background-color: #fefafc; 
+}
+
+h3 {
+    color: #da4343;
+}
+
+.heading1 {
+    color: #666;
+    margin-top: 20px;
+    font-family: 'Lucida Handwriting', 'cursive';
+}
+
+.heading2 {
+    color: #d35858;
+    font-family: 'Papyrus', 'fantasy';
+}
+
+.question1 {
+    border: 2px solid #c43d3d; 
+    padding: 10px;
+    background-color: #db275d; 
+    color: #e6aaaa;
+}
+
+.valentine {
+    display: block;
+  }
+
+
+
+#background-music {
+    display: none;
+}
+
+.cloudone {
+  position: absolute;
+  width:100px;
+  height:100px;
+  border-radius:100%;
+  background-color: #fff0f3;
+  z-index:-1;
+  top:350px;
+  left:-20px;
+  box-shadow: 55px 30px #fff0f3, 125px 10px #fff0f3,175px 20px #fff0f3, 250px 10px #fff0f3, 320px 5px #fff0f3, 380px 10px #fff0f3;
+}
+
+.cloudtwo {
+  position: absolute;
+  width: 100px;
+  height: 100px;
+  border-radius: 100%;
+  background-color: #fff0f3;
+  z-index: -1;
+  top: 100px;
+  right: 120px;
+  box-shadow: 
+    0 0 10px rgba(255, 240, 243, 0.8),
+    0 0 20px rgba(255, 240, 243, 0.6),
+    0 0 30px rgba(255, 240, 243, 0.4),
+    0 0 40px rgba(255, 240, 243, 0.2);
+}
+
+.cloudthree {
+  position: absolute;
+  width:100px;
+  height:100px;
+  border-radius:100%;
+  background-color: #fff0f3;
+  z-index:-1;
+  top:800px;
+  left:-100px;
+  box-shadow: 55px 30px #fff0f3, 125px 10px #fff0f3,175px 20px #fff0f3, 250px 10px #fff0f3;
+}
+
+.cloudfour {
+  position: absolute;
+  width:100px;
+  height:100px;
+  border-radius:100%;
+  background-color: #fff0f3;
+  z-index:-1;
+  top:580px;
+  right:200px;
+  box-shadow: 55px 30px #fff0f3, 125px 10px #fff0f3,175px 20px #fff0f3, 250px 10px #fff0f3, 320px 5px #fff0f3, 380px 10px #fff0f3;
+}
+
+.cloudfive {
+  position: absolute;
+  width:100px;
+  height:100px;
+  border-radius:100%;
+  background-color: #fff0f3;
+  z-index:-1;
+  top:1400px;
+  left:50px;
+  box-shadow: 55px 30px #fff0f3, 125px 10px #fff0f3,175px 20px #fff0f3, 250px 10px #fff0f3;
+}
+
+.cloudsix {
+  position: absolute;
+  width:100px;
+  height:100px;
+  border-radius:100%;
+  background-color: #fff0f3;
+  z-index:-1;
+  top:1100px;
+  right:270px;
+  box-shadow: 55px 30px #fff0f3, 125px 10px #fff0f3,175px 20px #fff0f3, 250px 10px #fff0f3;
+}
+
+.cloudseven {
+  position: absolute;
+  width:100px;
+  height:100px;
+  border-radius:100%;
+  background-color: #fff0f3;
+  z-index:-1;
+  top:1700px;
+  right:250px;
+  box-shadow: 55px 30px #fff0f3, 125px 10px #fff0f3,175px 20px #fff0f3, 250px 10px #fff0f3, 320px 5px #fff0f3, 380px 10px #fff0f3;
+}
+
+.cloudeight {
+  position: absolute;
+  width:100px;
+  height:100px;
+  border-radius:100%;
+  background-color: #fff0f3;
+  z-index:-1;
+  top:2000px;
+  left:-100px;
+  box-shadow: 55px 30px #fff0f3, 125px 10px #fff0f3,175px 20px #fff0f3, 250px 10px #fff0f3;
+}
+
+.cloudnine {
+  position: absolute;
+  width:100px;
+  height:100px;
+  border-radius:100%;
+  background-color: #fff0f3;
+  z-index:-1;
+  top:2250px;
+  right:300px;
+  box-shadow: 55px 30px #fff0f3, 125px 10px #fff0f3,175px 20px #fff0f3, 250px 10px #fff0f3;
+}
+
+
+
+.cupid {
+  position: absolute;
+  width: 100px;
+  z-index:-1;/* Maintain a square aspect ratio */
+  /* Additional styling for cupids */
+}
+
+.cupid1 {
+  position: absolute;
+  width:100px;
+  height:100px;
+  top:40%;
+  left:10%;
+  z-index:-1;
+  
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* Add additional styles as needed */

@@ -1,0 +1,104 @@
+body {
+    font-family: 'Papyrus', 'fantasy' ;
+    background-color: #bc3939c7;
+    color: #dfc3c3;
+}
+
+h1 {
+    color: #9e3030f6;
+    font-weight: bold;
+}
+
+div.gallery {
+  border: 1px solid #321111;
+}
+
+div.gallery:hover {
+  border: 1px solid #777;
+}
+
+div.gallery img {
+  width: 99%;
+  height: auto;
+}
+
+div.desc {
+  padding: 15px;
+  text-align: center;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.responsive {
+  padding: 0 5px;
+  float: left;
+  width: 20%;
+}
+
+@media only screen and (max-width: 700px) {
+    .responsive {
+      width: 49.99999%;
+      margin: 6px 0;
+    }
+  }
+  
+  @media only screen and (max-width: 500px) {
+    .responsive {
+      width: 100%;
+    }
+  }
+
+
+.clearfix:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+
+.videos {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    margin-top: 20px; 
+}
+
+.videos h2 {
+    margin-bottom: 20px; 
+    width: 100%; 
+}
+
+.videos video {
+    width: calc(33% - 10px); 
+    margin-right: 10px; 
+}
+
+h2 {
+    margin-bottom: 20px; 
+    color: #9e3030f6;
+}
+
+#background-music {
+    display: none;
+}
+
+button {
+    background-color: #a2254f;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.desc {
+    color: #040000; 
+    font-family: 'Papyrus', 'fantasy'; 
+    font-size: 16px; 
+
+}
+
+

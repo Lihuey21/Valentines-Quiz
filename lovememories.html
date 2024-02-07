@@ -1,0 +1,662 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles2.css">
+    <title>Love Memories Page</title>
+</head>
+
+<body>
+
+    <style>
+        @keyframes heartfade {
+            0% {
+                opacity : 1;
+            }
+            50% {
+                opacity : 0;
+            }
+        }
+        .heart {
+            z-index : 999;
+            animation : heartfade 6s linear;
+            position : absolute; 
+        }
+        .heart:before,
+        .heart:after {
+            content : "";
+            background-color : #7b0726;
+            position : absolute;
+            height : 30px;
+            width : 45px;
+            border-radius : 15px 0px 0px 15px;
+        }
+    
+        .heart:before {
+            transform : rotate(45deg);
+        }
+    
+        .heart:after {
+            left : 10.5px;
+            transform : rotate(135deg);
+        }
+        </style>
+    </head>
+    <body>
+        
+    </body>
+    <script>
+
+        
+        
+        var brd = document.createElement("DIV");
+        document.body.insertBefore(brd, document.getElementById("board"));
+    
+        const duration = 3000;
+        const speed = 0.5;
+        const cursorXOffset = 0;
+        const cursorYOffset = -5;
+    
+        var hearts = [];
+        
+        function generateHeart(x, y, xBound, xStart, scale)
+        {
+            var heart = document.createElement("DIV");
+            heart.setAttribute('class', 'heart');
+            brd.appendChild(heart);
+            heart.time = duration;
+            heart.x = x;
+            heart.y = y;
+            heart.bound = xBound;
+            heart.direction = xStart;
+            heart.style.left = heart.x + "px";
+            heart.style.top = heart.y + "px";
+            heart.scale = scale;
+            heart.style.transform = "scale(" + scale + "," + scale + ")";
+            if(hearts == null)
+                hearts = [];
+            hearts.push(heart);
+            return heart;
+        }
+    
+        var down = false;
+        var event = null;
+    
+        document.onmousedown = function(e) {
+            down = true;
+            event = e;
+        }
+    
+        document.onmouseup = function(e) {
+            down = false;
+        }
+    
+        document.onmousemove = function(e) {
+            event = e;
+        }
+    
+        document.ontouchstart = function(e) {
+            down = true;
+            event = e.touches[0];
+        }
+    
+        document.ontouchend = function(e) {
+            down = false;
+        }
+    
+        document.ontouchmove = function(e) {
+            event = e.touches[0];
+        }
+    
+        var before = Date.now();
+        var id = setInterval(frame, 5);
+        var gr = setInterval(check, 100);
+    
+        function frame()
+        {
+            var current = Date.now();
+            var deltaTime = current - before;
+            before = current;
+            for(i in hearts)
+            {
+                var heart = hearts[i];
+                heart.time -= deltaTime;
+                if(heart.time > 0)
+                {
+                    heart.y -= speed;
+                    heart.style.top = heart.y + "px";
+                    heart.style.left = heart.x + heart.direction * heart.bound * Math.sin(heart.y * heart.scale / 30) / heart.y * 200 + "px";
+                }
+                else
+                {
+                    heart.parentNode.removeChild(heart);
+                    hearts.splice(i, 1);
+                }
+            }
+        }
+    
+        function check()
+        {
+            if(down)
+            {
+                var start = 1 - Math.round(Math.random()) * 2;
+                var scale = Math.random() * Math.random() * 0.8 + 0.2;
+                var bound = 30 + Math.random() * 20;
+                generateHeart(event.pageX - brd.offsetLeft + cursorXOffset, event.pageY - brd.offsetTop + cursorYOffset, bound, start, scale);
+            }
+        }
+
+        
+    
+    </script>
+
+    <audio id="background-music" controls>
+        <source id="audio-source" src="lover.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+    
+    <button id="play-button">Play Audio</button>
+    
+    <script>
+        document.getElementById("play-button").addEventListener("click", function() {
+            var audio = document.getElementById("background-music");
+            audio.play();
+
+            
+    audio.addEventListener("ended", function() {
+        audio.currentTime = 0; // Reset the audio to the beginning
+        audio.play(); // Start playback again
+    });
+        });
+        var audio = document.getElementById("background-music");
+    var source = document.getElementById("audio-source");
+
+    var songs = ["lover.mp3", "hours.mp3", "lovestory.mp3", "lionking.mp3"]; // List of songs
+    var currentSongIndex = 0; // Index of the current song
+
+    // Function to play the next song
+    function playNextSong() {
+        currentSongIndex = (currentSongIndex + 1) % songs.length; // Increment index, looping back to 0 if needed
+        source.src = songs[currentSongIndex]; // Set the source to the next song
+        audio.load(); // Reload the audio element with the new source
+        audio.play(); // Start playing the next song
+    }
+
+    // Listen for the "ended" event to play the next song
+    audio.addEventListener("ended", playNextSong);
+</script>
+
+    
+    <h1>Our Love Diary</h1>
+    <div class="responsive">
+        <div class="gallery">
+          <a target="_blank" href="Wesley/pic1.png">
+            <img src="Wesley/pic1.png" alt="pic1" width="600" height="400">
+          </a>
+          <div class="desc">Our first conversation. I'm so glad that I make the first move.&#x1F970</div>
+        </div>
+      </div>
+      
+      
+      <div class="responsive">
+        <div class="gallery">
+          <a target="_blank" href="Wesley/pic2.jpg">
+            <img src="Wesley/pic2.jpg" alt="pic2" width="600" height="400">
+          </a>
+          <div class="desc">You were beside me when we were sitting on the plane. I never knew that I will meet the love of my life in a flight.</div>
+        </div>
+      </div>
+      
+      <div class="responsive">
+        <div class="gallery">
+          <a target="_blank" href="Wesley/pic5.png">
+            <img src="Wesley/pic5.png" alt="pic5" width="600" height="400">
+          </a>
+          <div class="desc">Our first call. Hehe I love your voice so much&#128518</div>
+        </div>
+      </div>
+      
+      <div class="responsive">
+        <div class="gallery">
+          <a target="_blank" href="Wesley\pic6.jpg">
+            <img src="Wesley\pic6.jpg" alt="pic6" width="600" height="400">
+          </a>
+          <div class="desc">You said you will miss me for the first time, but now I miss you everyday.</div>
+        </div>
+      </div>
+
+      <div class="responsive">
+        <div class="gallery">
+          <a target="_blank" href="Wesley\pic7.png">
+            <img src="Wesley\pic7.png" alt="pic7" width="600" height="400">
+          </a>
+          <div class="desc">The first time you sent me a picture in your uniform. My baby is so handsome wearing the army uniform.&#128525</div>
+        </div>
+      </div>
+      
+      <div class="responsive">
+        <div class="gallery">
+          <a target="_blank" href="Wesley\pic8.jpg">
+            <img src="Wesley\pic8.jpg" alt="pic8" width="600" height="400">
+          </a>
+          <div class="desc">Hmm, I guess I grant someone's wish that day? &#129300 </div>
+        </div>
+      </div>
+      
+      <div class="responsive">
+        <div class="gallery">
+          <a target="_blank" href="Wesley\pic9.jpg">
+            <img src="Wesley\pic9.jpg" alt="pic9" width="600" height="400">
+          </a>
+          <div class="desc">Heheh our first picture together, although it is just our hands and we're in long-distance-relationship.</div>
+        </div>
+      </div>
+      
+      <div class="responsive">
+        <div class="gallery">
+          <a target="_blank" href="Wesley\pic10.png">
+            <img src="Wesley\pic10.png" alt="pic10" width="600" height="400">
+          </a>
+          <div class="desc">My first scheduled message from you. I was so touched and really looking forward for your messages that time.</div>
+        </div>
+      </div>
+
+      <div class="responsive">
+        <div class="gallery">
+          <a target="_blank" href="Wesley\pic11.png">
+            <img src="Wesley\pic11.png" alt="pic11" width="600" height="400">
+          </a>
+          <div class="desc">Heheh one of the picture that I love when you're showering.</div>
+        </div>
+      </div>
+
+      <div class="responsive">
+        <div class="gallery">
+          <a target="_blank" href="Wesley\pic13.jpg">
+            <img src="Wesley\pic13.jpg" alt="pic13" width="600" height="400">
+          </a>
+          <div class="desc">The first flight ticket for me to fly over to meet you.</div>
+        </div>
+      </div>
+
+      <div class="responsive">
+        <div class="gallery">
+          <a target="_blank" href="Wesley\pic14.jpg">
+            <img src="Wesley\pic14.jpg" alt="pic14" width="600" height="400">
+          </a>
+          <div class="desc">I'm so glad that I changed my flight ticket that time. I guess it's just fate.</div>
+        </div>
+      </div>
+
+      <div class="responsive">
+        <div class="gallery">
+          <a target="_blank" href="Wesley\pic15.jpg">
+            <img src="Wesley\pic15.jpg" alt="pic15" width="600" height="400">
+          </a>
+          <div class="desc">Finally meet my baby, but you're walking so fast, I couldn't catch up on you, I thought you don't like me.</div>
+        </div>
+      </div>
+
+      <div class="responsive">
+        <div class="gallery">
+          <a target="_blank" href="Wesley\pic16.jpg">
+            <img src="Wesley\pic16.jpg" alt="pic16" width="600" height="400">
+          </a>
+          <div class="desc">Heheh I was holding you for the first time, I was so nervouse that time.</div>
+        </div>
+      </div>
+
+      <div class="responsive">
+        <div class="gallery">
+          <a target="_blank" href="Wesley\pic17.jpg">
+            <img src="Wesley\pic17.jpg" alt="pic17" width="600" height="400">
+          </a>
+          <div class="desc">Our first meal together, but I never finish the food and you help me to finish it hahah.</div>
+        </div>
+      </div>
+
+      <div class="responsive">
+        <div class="gallery">
+          <a target="_blank" href="Wesley\pic18.jpg">
+            <img src="Wesley\pic18.jpg" alt="pic18" width="600" height="400">
+          </a>
+          <div class="desc">The first time you tie my shoe laces for me, I love you&#128538</div>
+        </div>
+      </div>
+
+      <div class="responsive">
+        <div class="gallery">
+          <a target="_blank" href="Wesley\pic19.jpg">
+            <img src="Wesley\pic19.jpg" alt="pic19" width="600" height="400">
+          </a>
+          <div class="desc">One of the many pictures of us holding hands. We were dating at Orchard road.</div>
+        </div>
+      </div>
+
+      <div class="responsive">
+        <div class="gallery">
+          <a target="_blank" href="Wesley\pic20.jpg">
+            <img src="Wesley\pic20.jpg" alt="pic20" width="600" height="400">
+          </a>
+          <div class="desc">Our first time buying drinks together, and we were sharing the drinks.</div>
+        </div>
+      </div>
+
+      <div class="responsive">
+        <div class="gallery">
+          <a target="_blank" href="Wesley\pic21.jpg">
+            <img src="Wesley\pic21.jpg"  alt="pic21" width="600" height="400">
+          </a>
+          <div class="desc">I love this photo of our shadows, because I can't see my face hahaha.</div>
+        </div>
+      </div>
+
+      <div class="responsive">
+        <div class="gallery">
+          <a target="_blank" href="Wesley\pic23.jpg">
+            <img src="Wesley\pic23.jpg" alt="pic23" width="600" height="400">
+          </a>
+          <div class="desc">My baby was making coffee for me for the first time. Damn you look so handsome when you were holding the glass.</div>
+        </div>
+      </div>
+      
+      <div class="responsive">
+        <div class="gallery">
+          <a target="_blank" href="Wesley\pic24.jpg">
+            <img src="Wesley\pic24.jpg" alt="pic24" width="600" height="400">
+          </a>
+          <div class="desc">You were so cute when you put the mask on. I miss you a lottttttt. Can't wait to meet you soon.</div>
+        </div>
+      </div>
+      
+      <div class="responsive">
+        <div class="gallery">
+          <a target="_blank" href="Wesley\pic25.jpg">
+            <img src="Wesley\pic25.jpg" alt="pic25" width="600" height="400">
+          </a>
+          <div class="desc">Hmm what was my baby watching on his phone? I hope is not other girls, because you know your girl will be jealous hor</div>
+        </div>
+      </div>
+      
+      <div class="responsive">
+        <div class="gallery">
+          <a target="_blank" href="Wesley\pic26.jpg">
+            <img src="Wesley\pic26.jpg" alt="pic26" width="600" height="400">
+          </a>
+          <div class="desc">My baby look so stunning when he smiles.</div>
+        </div>
+      </div>
+      
+      <div class="responsive">
+        <div class="gallery">
+          <a target="_blank" href="Wesley\pic27.jpg">
+            <img src="Wesley\pic27.jpg" alt="pic27" width="600" height="400">
+          </a>
+          <div class="desc">We're on our way to Lavo, I miss that day.</div>
+        </div>
+      </div>
+      
+      <div class="responsive">
+        <div class="gallery">
+          <a target="_blank" href="Wesley\pic28.jpg">
+            <img src="Wesley\pic28.jpg" alt="pic28" width="600" height="400">
+          </a>
+          <div class="desc">Woooo this handsome guy is mineeeee.</div>
+        </div>
+      </div>
+
+      <div class="responsive">
+        <div class="gallery">
+          <a target="_blank" href="Wesley\pic29.jpg">
+            <img src="Wesley\pic29.jpg" alt="pic29" width="600" height="400">
+          </a>
+          <div class="desc">Yummm all the yummy food, but I like your food better.</div>
+        </div>
+      </div>
+
+      <div class="responsive">
+        <div class="gallery">
+          <a target="_blank" href="Wesley\pic30.jpg">
+            <img src="Wesley\pic30.jpg" alt="pic30" width="600" height="400">
+          </a>
+          <div class="desc">Beauty and the beast ah, you are the beauty, because I fat.&#128527</div>
+        </div>
+      </div>
+
+      <div class="responsive">
+        <div class="gallery">
+          <a target="_blank" href="Wesley\pic33.jpg">
+            <img src="Wesley\pic33.jpg" alt="pic33" width="600" height="400">
+          </a>
+          <div class="desc">Finally a picture of our hand making love shape without editing.&#128522</div>
+        </div>
+      </div>
+
+      <div class="responsive">
+        <div class="gallery">
+          <a target="_blank" href="Wesley\pic34.jpg">
+            <img src="Wesley\pic34.jpg" alt="pic34" width="600" height="400">
+          </a>
+          <div class="desc">Damn I look so tall in this picture and you look amazing.</div>
+        </div>
+      </div>
+
+      <div class="responsive">
+        <div class="gallery">
+          <a target="_blank" href="Wesley\pic35.jpg">
+            <img src="Wesley\pic35.jpg" alt="pic35" width="600" height="400">
+          </a>
+          <div class="desc">The first flower bouquet you got for me, cute but could be better yaa. </div>
+        </div>
+      </div>
+
+      <div class="responsive">
+        <div class="gallery">
+          <a target="_blank" href="Wesley\pic41.jpg">
+            <img src="Wesley\pic41.jpg" alt="pic41" width="600" height="400">
+          </a>
+          <div class="desc">My baby bought me so many giftsssss</div>
+        </div>
+      </div>
+
+      <div class="responsive">
+        <div class="gallery">
+          <a target="_blank" href="Wesley\pic42.jpg">
+            <img src="Wesley\pic42.jpg" alt="pic42" width="600" height="400">
+          </a>
+          <div class="desc">I put your shirt on the dog so I can hug you every day. You should spray more perfume on your shirt, so that I can smell your body scent every time. I love you so muchhhhh and I miss you. I can't wait to meet you soon.</div>
+        </div>
+      </div>
+
+      <div class="responsive">
+        <div class="gallery">
+          <a target="_blank" href="Wesley\pic48.jpg">
+            <img src="Wesley\pic48.jpg" alt="pic48" width="600" height="400">
+          </a>
+          <div class="desc">Dayummmm I have the best man and the best scenery in the same picture.</div>
+        </div>
+      </div>
+
+      <div class="responsive">
+        <div class="gallery">
+          <a target="_blank" href="Wesley\pic49.jpg">
+            <img src="Wesley\pic49.jpg" alt="pic49" width="600" height="400">
+          </a>
+          <div class="desc">Heheh luckily my man switch the food with me, if not Imma cry there.</div>
+        </div>
+      </div>
+
+      <div class="responsive">
+        <div class="gallery">
+          <a target="_blank" href="Wesley\pic36.jpg">
+            <img src="Wesley\pic36.jpg" alt="pic36" width="600" height="400">
+          </a>
+          <div class="desc">The last day of us holding hands &#128546 How I wish I could stay with you forever. I will wait till the day that we can stay together.</div>
+        </div>
+      </div>
+
+      
+      <div class="responsive">
+        <div class="gallery">
+          <a target="_blank" href="Wesley\pic37.jpg">
+            <img src="Wesley\pic37.jpg" alt="pic37" width="600" height="400">
+          </a>
+          <div class="desc">The first long conversation I had with you, and I was so touched with your answer, I cried.</div>
+        </div>
+      </div>
+
+      <div class="responsive">
+        <div class="gallery">
+          <a target="_blank" href="Wesley\pic37a.png">
+            <img src="Wesley\pic37a.png" alt="pic37a" width="600" height="400">
+          </a>
+          <div class="desc">I'm so touched that you wrote so much and telling me about your feelings about my trip there.</div>
+        </div>
+      </div>
+
+      <div class="responsive">
+        <div class="gallery">
+          <a target="_blank" href="Wesley\pic38.jpg">
+            <img src="Wesley\pic38.jpg" alt="pic38" width="600" height="400">
+          </a>
+          <div class="desc">One of the text that I love so much. I hope I could have a family with you too.</div>
+        </div>
+      </div>
+
+      <div class="responsive">
+        <div class="gallery">
+          <a target="_blank" href="Wesley\pic39.jpg">
+            <img src="Wesley\pic39.jpg" alt="pic39" width="600" height="400">
+          </a>
+          <div class="desc">I love that you will tell me you love me every day.</div>
+        </div>
+      </div>
+
+      <div class="responsive">
+        <div class="gallery">
+          <a target="_blank" href="Wesley\pic31.jpg">
+            <img src="Wesley\pic31.jpg" alt="pic31" width="600" height="400">
+          </a>
+          <div class="desc">I like this picture because I look good in it hahah, and you smiled.</div>
+        </div>
+      </div>
+
+      <div class="responsive">
+        <div class="gallery">
+          <a target="_blank" href="Wesley\pic32.jpg">
+            <img src="Wesley\pic32.jpg" alt="pic32" width="600" height="400">
+          </a>
+          <div class="desc">Someone kissed meeeeeee woooo, why not on the lips?</div>
+        </div>
+      </div>
+
+      <div class="responsive">
+        <div class="gallery">
+          <a target="_blank" href="Wesley\pic43.png">
+            <img src="Wesley\pic43.png" alt="pic43" width="600" height="400">
+          </a>
+          <div class="desc">You were so cute with Tabby in this picture.</div>
+        </div>
+      </div>
+
+      <div class="responsive">
+        <div class="gallery">
+          <a target="_blank" href="Wesley\pic44.png">
+            <img src="Wesley\pic44.png" alt="pic44" width="600" height="400">
+          </a>
+          <div class="desc">I'm really lucky to have you baby.</div>
+        </div>
+      </div>
+
+      <div class="responsive">
+        <div class="gallery">
+          <a target="_blank" href="Wesley\pic45.png">
+            <img src="Wesley\pic45.png" alt="pic45" width="600" height="400">
+          </a>
+          <div class="desc">I love it when you make the heart shape face.</div>
+        </div>
+      </div>
+
+      
+      <div class="responsive">
+        <div class="gallery">
+          <a target="_blank" href="Wesley\pic46.jpg">
+            <img src="Wesley\pic46.jpg" alt="pic46" width="600" height="400">
+          </a>
+          <div class="desc">Okie this is a picture of me that you requested HAHHAHAHA.</div>
+        </div>
+      </div>
+
+      
+      <div class="responsive">
+        <div class="gallery">
+          <a target="_blank" href="Wesley\pic47.jpg">
+            <img src="Wesley\pic47.jpg" alt="pic47" width="600" height="400">
+          </a>
+          <div class="desc">Your first picture with the soft toy I gave you.</div>
+        </div>
+      </div>
+
+
+      <div class="clearfix"></div>
+      
+      <div style="padding:6px;">
+
+
+        <div class="videos">
+            <h2>My Baby's Cute Videos</h2>
+            <video controls>
+                <source src="Wesley\vid1.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+            <video controls>
+                <source src="Wesley\vid2.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+
+            <video controls>
+                <source src="Wesley\vid3.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+
+            
+            <video controls>
+                <source src="Wesley\vid4.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+
+            
+            <video controls>
+                <source src="Wesley\vid5.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+
+            <video controls>
+                <source src="Wesley\vid6.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+        </div>
+
+        <div class="messages">
+            <h1>Love Letter&#x1F48C</h1>
+            <div class="message" style="font-size: 18px;">
+                <p style ="color: black; font-weight: bold;">Hello baby, when you see this message, it means that you've answered all of the questions correctly. Yayyyyyy!!! I am not sure when are you doing this quiz, might be before Valentine's day. No matter what day it is, everyday will be a Valentine's Day with you &#x1F970. This is the first time celebrating Valentine's Day with you, I hope I get to celebrate this very special day with you every year. I want to say that I'm so grateful to have you in my life, and I really really hope that we can last till forever. I want to prove everyone that they're wrong, they're wrong that they think we will break up just because we're young or immature.
+                    Baby, I want to take a moment to express just how much you mean to me on this special day. Your smile and laughter have captured my heart and you always stand by my side whenever I faced any problem in my life. I'm so thankful that I've met someone so wonderful and to call him my boyfriend. I believe that with our love, we can overcome many obstacles together, I know things are hard for both of us now, but please stay strong baby. I'm sorry for the childish fight with you, please forgive me for the times I've let my 
+                    emotions get the best of me. I love you more than words can express, and I promise you I will do better. Thank you for never giving up on me and thank you for your love, your patience and support.
+                </p> 
+
+                <p style ="color: black; font-weight: bold;">Baby, I wish that someday I can wake up beside you every morning and making memories, travel and explore places around the world and to build our home with you. I know it is too early to say now, but really, I want to be with you, and only you. I can't imagine my future without you, and I hope you feel the same.
+                    No matter how hard our day is, I hope you will always remember that I am there for you and I will always stay by your side to care and support you. I know that you don't really express your feelings, but baby, if you need someone to comfort you, I'm there for you.
+                    I love your smiles, your laughter, your naughtiness and your sweetness. I love that you can be you, the true self infront of me, I hope I can heal your inner child, as well as mine. I am grateful for the way you love me, flaws and all. You accept me for who I am, and you make me want to be the best version of myself. With you, I feel safe to be me, to let down my walls and show you the depths of my heart. Thank you for all the memories you've made with me.
+                </p>
+
+                <p style ="color: black; font-weight: bold;">Let's enjoy this special day, I know and believe that this will not be the last day of us celebrating Valentine's Day together. This page will always be available and I will always update this love letter about how much I love you when day goes by. I love you so much baby. Your gift will be given to you soon once you meet my brother okay. I LOVE YOUUUU!!!! ps: I know the design is very ugly please don't dislike the design, I'll let you design the website next time HAHAHAHAH</p>
+            </div>
+            
+        </div>
+    </div>
+</body>
+
+</html>
